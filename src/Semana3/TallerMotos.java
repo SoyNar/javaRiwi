@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class TallerMotos {
 
+    // declarar array tridimensional
+    public static String[][][] mechanic;
+    // inicializar la matrix tridimencional de manera global
 
 
 // principal para ejecutar las funcionalidades y correr el menu
@@ -12,7 +15,7 @@ public class TallerMotos {
         Scanner dataEntry = new Scanner(System.in);
         int maxEmployees;
          int maxVhicles;
-        ;
+
         int option;
         String menu = """
                  1. Agregar trabajo
@@ -48,7 +51,7 @@ public class TallerMotos {
                     imprimirDatos(maxEmployees, maxVhicles);
                     break;
                 case 3:
-                    System.out.println("escriba marca del vehiculo");
+                    System.out.println("escriba marca o modelo del vehiculo");
                     dataEntry.nextLine();
                     String brandOrModel = dataEntry.nextLine();
                     showVehicleByModel(brandOrModel);
@@ -75,18 +78,7 @@ public class TallerMotos {
 
         } while (option != 6);
 
-
-
-
-
-
-
-
     }
-    // declarar array tridimensional
-    public static String[][][] mechanic;
-    // inicializar la matrix tridimencional de manera global
-
 
     // metodo para registrar un trabajo
     public static void registerEmployee(Scanner dataEntry, int max, int maxVehicles){
@@ -96,11 +88,8 @@ public class TallerMotos {
         String year;
         String status;
         // recorrer teniendo en cuenta el maximo ingresado por el user
-       for(int i=0;i<max; i++){
-           System.out.println("ingrese el nombre del empleado" + (i+1));
-           dataEntry.nextLine();
-           String employee = dataEntry.nextLine();
 
+       for(int i=0;i<max; i++){
            // validar si hay indice 0 de la primera dimension con dato null
            int index= 0;
            for(; index<maxVehicles; index++){
@@ -108,19 +97,24 @@ public class TallerMotos {
                    break;
                }
            }
+           System.out.println("ingrese el nombre del empleado" + (i+1));
+           dataEntry.nextLine();
+           String employee = dataEntry.nextLine();
            // validar si excede la longitud del array
 
 
            if(index < maxVehicles){
-               System.out.println("ingrese el tipo de vehiculo");
                dataEntry.nextLine();
+               System.out.println("ingrese el tipo de vehiculo");
                String typeVehicle = dataEntry.nextLine();
-
 
                if(typeVehicle.equalsIgnoreCase("moto")){
                    typeIndex = 0;
-               }else {
+               }else if(typeVehicle.equalsIgnoreCase("carro")) {
                    typeIndex = 1;
+               } else {
+                   System.out.println("ingrese vehiculo valido");
+                   continue;
                }
                System.out.println("ingrese la marca");
                brand = dataEntry.nextLine();
@@ -135,10 +129,10 @@ public class TallerMotos {
                status = dataEntry.nextLine();
 
                //guardar datos
-               mechanic[i][index][0] = brand;
-               mechanic[i][index][1] = modeloOfcar;
-               mechanic[i][index][2] = year;
-               mechanic[i][index][3] = status;
+               mechanic[i][typeIndex][0] = brand;
+               mechanic[i][typeIndex][1] = modeloOfcar;
+               mechanic[i][typeIndex][2] = year;
+               mechanic[i][typeIndex][3] = status;
            } else {
                System.out.println("no se pueden agregar mas trabajos");
            }

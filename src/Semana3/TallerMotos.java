@@ -97,13 +97,20 @@ public class TallerMotos {
                    break;
                }
            }
+
+
+           // verifica si hay espacio disponible para agregar mas trabajo
+           // si el indice es mayor o igual a la longitud de la dimension
+           // es porque no hay espacio
+           if(index >= maxVehicles){
+               System.out.println("No se puede agregar mas trabjo");
+               return; // hace que el metodo deje de ejecutarse por completo
+           }
+
            System.out.println("ingrese el nombre del empleado" + (i+1));
            dataEntry.nextLine();
            String employee = dataEntry.nextLine();
            // validar si excede la longitud del array
-
-
-           if(index < maxVehicles){
                dataEntry.nextLine();
                System.out.println("ingrese el tipo de vehiculo");
                String typeVehicle = dataEntry.nextLine();
@@ -133,9 +140,7 @@ public class TallerMotos {
                mechanic[i][typeIndex][1] = modeloOfcar;
                mechanic[i][typeIndex][2] = year;
                mechanic[i][typeIndex][3] = status;
-           } else {
-               System.out.println("no se pueden agregar mas trabajos");
-           }
+
            }
     }
 // metodo para imprimir datos
